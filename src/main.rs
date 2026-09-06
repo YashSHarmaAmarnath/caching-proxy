@@ -4,30 +4,16 @@ mod utils;
 
 fn main() {
     let args: CliArgs = utils::cli::parse_args();
-    println!("{:?}",args);
+    // println!("{:?}",args);
 
-    if args.clear_cache{
+    if args.clear_cache {
         println!("Clear cache");
         return;
     }
+    let port = args.port.unwrap();
+    let origin = args.origin.unwrap();
 
-    let port = match args.port {
-        Some(p)=>p,
-        None=>{
-            eprintln!("Error: --port is required to start server");
-            std::process::exit(1);
-        }
-    };
-
-    let origin = match args.origin {
-        Some(o)=>o,
-        None=>{
-            eprintln!("Error: --origin is required to start server");
-            std::process::exit(1);
-        }
-    };
-
-    if port <= 0{
+    if port == 0 {
         eprintln!("Error: --port value invalid");
         std::process::exit(1);
     }
