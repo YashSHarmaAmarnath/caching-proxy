@@ -26,7 +26,7 @@ async fn main() {
 
     println!("start caching proxy at port: {port} for origin:{origin}");
 
-    let app = utils::proxy_server::create_router();
+    let app = utils::proxy_server::create_router(origin);
 
     let addr = format!("127.0.0.1:{port}");
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
